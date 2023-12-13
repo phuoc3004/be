@@ -20,7 +20,7 @@ public class Pbl6Application {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("https://valid-pie-production.up.railway.app/") // Add your Netlify app's URL
+						.allowedOrigins("https://poetic-salamander-6fa62c.netlify.app") // Add your Netlify app's URL
 						.allowedMethods("GET", "POST", "PUT", "DELETE")
 						.allowCredentials(true);
 			}
