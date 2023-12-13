@@ -1,0 +1,22 @@
+-- MODIFY ORDER --
+ALTER TABLE `clothes_store`.`orders`
+CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT ;
+
+CREATE TABLE IF NOT EXISTS `clothes_store`.`order_items` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `order_id` INT NOT NULL,
+  `product_variant_id` INT NOT NULL,
+  `quantity` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_order_items_order_idx` (`order_id` ASC) VISIBLE,
+  INDEX `fk_order_items_product_variant_idx` (`product_variant_id` ASC) VISIBLE,
+  CONSTRAINT `fk_order_items_order`
+    FOREIGN KEY (`order_id`)
+    REFERENCES `clothes_store`.`orders` (`id`),
+  CONSTRAINT `fk_order_items_product_variant`
+    FOREIGN KEY (`product_variant_id`)
+    REFERENCES `clothes_store`.`product_variants` (`id`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;

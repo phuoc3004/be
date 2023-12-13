@@ -1,0 +1,38 @@
+-- MODIFY --
+ALTER TABLE `clothes_store`.`products`
+    MODIFY COLUMN `id` INT AUTO_INCREMENT;
+
+-- ADD AGAIN FOREIGN KEY --
+ALTER TABLE `clothes_store`.`cart_items`
+    ADD CONSTRAINT `fk_cart_items_products1`
+        FOREIGN KEY (`products_id`)
+            REFERENCES `clothes_store`.`products` (`id`);
+ALTER TABLE `clothes_store`.`favourite_products`
+    ADD CONSTRAINT `fk_favourite_products_products1`
+        FOREIGN KEY (`products_id`)
+            REFERENCES `clothes_store`.`products` (`id`);
+ALTER TABLE `clothes_store`.`product_images`
+    ADD CONSTRAINT `fk_product_images_products1`
+        FOREIGN KEY (`products_id`)
+            REFERENCES `clothes_store`.`products` (`id`);
+ALTER TABLE `clothes_store`.`reviews`
+    ADD CONSTRAINT `fk_reviews_products1`
+        FOREIGN KEY (`products_id`)
+            REFERENCES `clothes_store`.`products` (`id`);
+
+-- ADD DISCOUNT IN PRODUCTS --
+ALTER TABLE `clothes_store`.`products`
+    ADD COLUMN `discount` INT NULL AFTER `price`;
+
+-- DROP CU DATE IN PRODUCTS_IMAGES --
+ALTER TABLE `clothes_store`.`product_images`
+DROP COLUMN `update_date`,
+DROP COLUMN `create_date`,
+CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT,
+CHANGE COLUMN `url` `url` VARCHAR(255) NULL;
+
+-- ADD COLUMN SIZE, COLOR TO PRODUCTS --
+ALTER TABLE `clothes_store`.`products`
+    ADD COLUMN `color` VARCHAR(45) NULL AFTER `categories_id`,
+ADD COLUMN `size` VARCHAR(45) NULL AFTER `color`;
+

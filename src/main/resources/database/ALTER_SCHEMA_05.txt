@@ -1,0 +1,5 @@
+-- MODIFY FAVOURITE PRODUCT --
+ALTER TABLE `clothes_store`.`favourite_products`
+DROP COLUMN `update_date`,
+DROP COLUMN `create_date`,
+CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT ;

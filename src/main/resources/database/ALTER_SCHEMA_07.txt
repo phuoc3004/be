@@ -1,0 +1,3 @@
+-- Add address delivery --
+ALTER TABLE `clothes_store`.`orders`
+ADD COLUMN `address_delivery` VARCHAR(255) NULL ;

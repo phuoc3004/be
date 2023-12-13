@@ -1,0 +1,44 @@
+-- DROP --
+ALTER TABLE `clothes_store`.`products`
+DROP COLUMN `color`,
+DROP COLUMN `size`;
+
+-- ADD GENDER + AVATAR TO USER TABLE --
+ALTER TABLE `clothes_store`.`users`
+ADD COLUMN `gender` VARCHAR(45) NOT NULL AFTER `address`,
+ADD COLUMN `avatar` VARCHAR(255) NULL AFTER `gender`;
+
+-- ADD TABLE PRODUCT_VARIANTS --
+CREATE TABLE IF NOT EXISTS `clothes_store`.`product_variants` (
+  `id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  `color` VARCHAR(45) NOT NULL,
+  `size` VARCHAR(45) NOT NULL,
+  `quantity` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_product_variants_products1_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_product_variants_products1`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `clothes_store`.`products` (`id`)
+);
+
+ALTER TABLE `clothes_store`.`product_variants`
+MODIFY COLUMN quantity INT DEFAULT 0;
+
+ALTER TABLE `clothes_store`.`product_variants`
+CHANGE COLUMN `color` `color` VARCHAR(45) NULL ,
+CHANGE COLUMN `size` `size` VARCHAR(45) NULL ,
+CHANGE COLUMN `quantity` `quantity` INT NULL ;
+
+ALTER TABLE `clothes_store`.`product_variants`
+CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT ;
+
+-- DROP COLUMN quantity IN PRODUCT --
+ALTER TABLE `clothes_store`.`products`
+DROP COLUMN `quantity`;
+
+DROP TABLE `clothes_store`.`product_images`;
+
+-- ADD COLUMN IMAGE IN PRODUCTS --
+ALTER TABLE `clothes_store`.`products`
+ADD COLUMN `image` VARCHAR(511) NULL AFTER `categories_id`;
